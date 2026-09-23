@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⛰️ Picos de Europa — 2–5 Out 2026 | Família Antunes & Gomes</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+:root{--accent:#f59e0b;--accent2:#2563eb;--green:#10b981;--red:#ef4444;--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--muted:#94a3b8;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.container{max-width:900px;margin:0 auto;padding:20px}
+.hero{text-align:center;padding:50px 20px 30px;background:linear-gradient(160deg,#1e3a5f 0%,#0f172a 60%,#1e293b 100%);border-bottom:3px solid var(--accent)}
+.hero h1{font-size:2.2em;margin-bottom:10px;color:#fff}
+.hero p{font-size:1.1em;color:var(--muted);margin-bottom:8px}
+.hero .badge{display:inline-block;background:var(--accent);color:#111;padding:6px 14px;border-radius:20px;font-size:.9em;margin-top:10px;font-weight:600}
+.grupo{display:flex;justify-content:center;gap:10px;margin-top:15px;flex-wrap:wrap}
+.grupo span{background:rgba(255,255,255,.1);padding:6px 14px;border-radius:20px;font-size:.85em}
+.section{margin:30px 0}
+.section h2{color:var(--accent);border-left:4px solid var(--accent);padding-left:12px;margin-bottom:15px;font-size:1.4em}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:15px}
+.card .dia{display:inline-block;background:var(--accent);color:#111;padding:3px 12px;border-radius:15px;font-size:.85em;margin-bottom:8px;font-weight:600}
+.card h3{font-size:1.15em;margin-bottom:8px;color:#fff}
+.card p{color:var(--muted);font-size:.95em;margin-bottom:4px}
+.step{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #334155;align-items:flex-start}
+.step:last-child{border-bottom:none}
+.step .hora{min-width:64px;font-weight:700;color:var(--accent);font-size:.9em;padding-top:2px}
+.step .ico{font-size:1.3em}
+.step .txt{flex:1;font-size:.95em;color:var(--muted)}
+.step .ico a,.step .txt a{color:var(--accent2);text-decoration:none}
+.step .txt strong{color:var(--text)}
+.curio{background:#16233d;border-left:4px solid #8b5cf6;border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0;font-size:.9em;color:var(--muted)}
+.curio b{color:#c4b5fd}
+.dica{background:#132d1f;border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0;font-size:.9em;color:var(--muted)}
+.dica-box{background:#2d1f13;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0;font-size:.9em;color:var(--muted)}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th,td{padding:10px 8px;text-align:left;border-bottom:1px solid #334155;font-size:.9em;color:var(--muted)}
+th{color:var(--accent2);font-weight:600}
+.estadia{background:var(--card);border-radius:12px;padding:16px;margin-bottom:14px;border:1px solid #334155}
+.estadia h4{color:#fff;margin-bottom:6px;font-size:1.05em}
+.estadia .preco{color:var(--green);font-weight:700}
+.estadia p{color:var(--muted);font-size:.9em}
+.btn{display:inline-block;background:var(--accent2);color:#fff;padding:8px 16px;border-radius:20px;text-decoration:none;font-size:.9em;margin:6px 6px 0 0}
+.btn:hover{filter:brightness(1.15)}
+.mapa-box{border-radius:12px;overflow:hidden;height:460px;background:#1a1a2e;margin:15px 0}
+#mapa{width:100%;height:100%}
+.legend{text-align:center;color:var(--muted);font-size:.85em;margin-bottom:10px}
+footer{text-align:center;padding:30px;color:var(--muted);font-size:.9em}
+a{color:var(--accent2)}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.tabs a{background:rgba(255,255,255,.1);color:#fff;padding:6px 14px;border-radius:20px;text-decoration:none;font-size:.85em}
+.tabs a:hover{background:rgba(255,255,255,.2)}
+@media(max-width:600px){
+.hero h1{font-size:1.6em}
+.step{flex-wrap:wrap}
+.step .hora{min-width:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>⛰️ Picos de Europa — Cantábria</h1>
+  <p>2 a 5 de Outubro de 2026 • Fim de semana prolongado</p>
+  <p style="margin-top:5px">Mogrovejo • Fuente Dé • Potes • Cabárceno • Santander</p>
+  <div class="grupo">
+    <span>👨‍👩‍👧‍👦 João + Rita + Flor & Íris (6, 8)</span>
+    <span>👨‍👩‍👧‍👦 Mike + Ana + Mariana & Rodrigo (13, 17)</span>
+    <span>❓ Isabel + Zé (por confirmar)</span>
+  </div>
+  <span class="badge">2–3 carroças • 8–10 pessoas</span>
+  <div class="tabs" style="margin-bottom:0">
+    <a href="#itinerario">📅 Itinerário</a>
+    <a href="#estadias">🛏️ Estadias</a>
+    <a href="#mapa">🗺️ Mapa</a>
+    <a href="#curiosidades">🏛️ Curiosidades</a>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="dica-box">
+  💡 <strong>Alojamento ainda por reservar</strong> — as sugestões abaixo estão ordenadas por preço e avaliações. Confirmar o casal 3 antes de reservar (quartos familiares para 4 esgotam rápido nas datas de ponte).
+</div>
+
+<!-- ==================== ITINERÁRIO ==================== -->
+<div class="section" id="itinerario">
+  <h2>📅 Itinerário Dia a Dia</h2>
+
+  <div class="card">
+    <span class="dia">Sex 2 Out — Sexta</span>
+    <h3>🇵🇹 Portugal → 🛏️ Palencia</h3>
+    <div class="step"><span class="hora">Manhã</span><span class="ico">🚗</span><span class="txt"><strong>Lisboa / Figueira / Batalha</strong> — cada família sai da sua base, encontro na A62/A-62 em direção a Espanha.</span></div>
+    <div class="step"><span class="hora">Sugestão</span><span class="ico">⛪</span><span class="txt"><a href="https://www.google.com/maps/search/Mosteiro+da+Batalha" target="_blank">Mosteiro da Batalha</a> — paragem de 45 min para quem vem do sul. Gótico português no seu melhor (ver curiosidade abaixo).</span></div>
+    <div class="step"><span class="hora">~19:00</span><span class="ico">🏙️</span><span class="txt">Chegada a <strong><a href="https://www.google.com/maps/search/Palencia+Espanha" target="_blank">Palencia</a></strong> (~630 km de Lisboa, ~6h15 + paragens). Jantar na <strong>Calle Mayor</strong> — rota de tapas com espetos de leitão e morcilla.</span></div>
+    <div class="step"><span class="hora">Noite</span><span class="ico">🛏️</span><span class="txt">Dormida em Palencia — ver sugestões na secção Estadias.</span></div>
+    <div class="curio"><b>⚔️ Fato histórico:</b> O Mosteiro da Batalha foi mandado construir por D. João I para cumprir um voto feito <i>antes</i> da Batalha de Aljubarrota (14 Ago 1385) — se vencesse os castelhanos, ergueria um mosteiro. Venceu com 6.500 homens contra 30.000. A batalha decidiu a independência de Portugal.</div>
+    <div class="curio"><b>🏛️ Fato histórico:</b> A Catedral de Palencia chama-se <b>"La Bella Desconocida"</b> — esconde um retrato anamórfico de Carlos V que só se vê corretamente por espelho, e o túmulo de San Antolín. É uma das maiores catedrais de Espanha e ninguém lá fora fala dela.</div>
+    <p style="margin-top:10px"><a class="btn" href="https://www.google.com/maps/dir/Lisboa/Batalha/Palencia,+Espanha" target="_blank">🗺️ Rota no Google Maps</a></p>
+  </div>
+
+  <div class="card">
+    <span class="dia">Sáb 3 Out — Picos de Europa</span>
+    <h3>🌄 Mogrovejo → Fuente Dé → Potes</h3>
+    <div class="step"><span class="hora">~09:00</span><span class="ico">🚗</span><span class="txt">Saída de Palencia → <strong><a href="https://www.google.com/maps/search/Mogrovejo+Cantabria" target="_blank">Mogrovejo</a></strong> (~2h15, 167 km). Últimos 20 km pela CA-185 já dentro dos Picos.</span></div>
+    <div class="step"><span class="hora">11:15</span><span class="ico">🏘️</span><span class="txt"><strong>Mogrovejo</strong> — 40 habitantes, castelo medieval torreão do séc. XIII, um dos "Pueblos más Bonitos de España". Foi cenário de Heidi. 45–60 min chegam para se enamorarem.</span></div>
+    <div class="step"><span class="hora">12:15</span><span class="ico">🚠</span><span class="txt"><strong><a href="https://www.google.com/maps/search/Teleférico+Fuente+Dé" target="_blank">Fuente Dé</a></strong> (10 min de Mogrovejo) — teleférico que sobe 753 m em 4 minutos. Bilhete ~17€ adulto / ~10€ criança. <strong>RESERVAR ANTES</strong> em <a href="https://entradas.telefericofuentede.com/" target="_blank">entradas.telefericofuentede.com</a> — em pontes esgota.</span></div>
+    <div class="step"><span class="hora">13:00</span><span class="ico">🥪</span><span class="txt"><strong>Picnic no miradouro do El Cable</strong> (topo do teleférico, 1.823 m) — vistas sobre o Macizo de Andara e toda a Liébana. Levar casaco: em outubro pode estar a 5–10 °C.</span></div>
+    <div class="step"><span class="hora">15:00</span><span class="ico">⛪</span><span class="txt"><strong><a href="https://www.google.com/maps/search/Santo+Toribio+de+Liébana" target="_blank">Santo Toribio de Liébana</a></strong> — mosteiro franciscano com o <b>Lignum Crucis</b>, o maior fragmento conhecido da cruz de Cristo. Entrada ~3€.</span></div>
+    <div class="step"><span class="hora">16:30</span><span class="ico">🏘️</span><span class="txt"><strong><a href="https://www.google.com/maps/search/Potes+Cantabria" target="_blank">Potes</a></strong> — capital da Liébana, pontes medievais e torres. Provar o <b>cocido lebaniego</b> ou orujo. Café no Café Fósforo (el bar de Potes).</span></div>
+    <div class="step"><span class="hora">20:30</span><span class="ico">🍲</span><span class="txt"><strong>Jantar em Potes</strong> — reservar mesa para 8–10. Depois regresso à dormida na zona de Liébana (10–15 min).</span></div>
+    <div class="curio"><b>🏔️ Fato histórico:</b> O teleférico de Fuente Dé foi inaugurado em <b>1966</b> — obra de engenharia sem estrada de acesso: todo o material foi transportado por helicóptero. É o que permite tocar quase 2.000 m de montanha em 4 minutos.</div>
+    <div class="curio"><b>✝️ Fato histórico:</b> Santo Toribio é um dos <b>6 locais do mundo</b> com direito a Ano Jubilar permanente (com Jerusalém, Roma, Santiago, Caravaca e Ávila), privilégio dado pelo Papa Júlio II em <b>1512</b>. O mosteiro guarda também os escritos de <b>Beato de Liébana</b>, o monge que calculou o fim do mundo para o ano 800 — e errou.</div>
+    <div class="dica">💡 <b>Dica prática:</b> o estacionamento de Fuente Dé é pago e pequeno (~5€/dia). Cheguem cedo ou comprem bilhete com hora marcada. Se as crianças cansarem, o miradouro de Santa Catalina em Potes é ponto de foto garantido.</div>
+    <p style="margin-top:10px"><a class="btn" href="https://www.google.com/maps/dir/Palencia/Mogrovejo,+Cantabria/Telef%C3%A9rico+Fuente+D%C3%A9/Santo+Toribio+de+Li%C3%A9bana/Potes" target="_blank">🗺️ Rota do dia no Google Maps</a></p>
+  </div>
+
+  <div class="card">
+    <span class="dia">Dom 4 Out — Cabárceno</span>
+    <h3>🦒 Parque de Cabárceno (dia inteiro)</h3>
+    <div class="step"><span class="hora">~08:30</span><span class="ico">🚗</span><span class="txt">Saída cedo da Liébana → Cabárceno (~1h45, 110 km pela CA-185 + A-67). Chegar à abertura evita filas e os animais estão mais ativos de manhã.</span></div>
+    <div class="step"><span class="hora">10:00</span><span class="ico">🦁</span><span class="txt"><strong><a href="https://www.google.com/maps/search/Parque+de+Cabárceno" target="_blank">Parque de la Naturaleza de Cabárceno</a></strong> — 750 hectares de antiga mina convertida em semiliberdade: elefantes, girafas, rinocerontes, ursos, gorilas. Percurso de carro de ~20 km com paragens.</span></div>
+    <div class="step"><span class="hora">12:30</span><span class="ico">🚠</span><span class="txt"><strong>Telecabina</strong> — incluída no bilhete geral (não pagar extra!). Vistas panorâmicas sobre o parque inteiro. Cabines aceitam carrinhos de bebé.</span></div>
+    <div class="step"><span class="hora">13:00</span><span class="ico">🥪</span><span class="txt"><strong>Almoço</strong> — áreas de picnic no parque, ou restaurantes na zona de entrada (~12–18€/pessoa).</span></div>
+    <div class="step"><span class="hora">17:30</span><span class="ico">🛏️</span><span class="txt">Saída → dormir na <strong>zona de Cabárceno / Penagos / Santander</strong> (10–20 min).</span></div>
+    <div class="curio"><b>⛏️ Fato histórico:</b> Cabárceno não é um zoo — é uma <b>mina de ferro abandonada</b> (explorada desde os romanos até 1985) transformada em parque de semiliberdade. As falésias vermelhas de dolomita são cicatrizes da mineração, hoje palco dos animais. Reciclagem de paisagem em grande escala.</div>
+    <div class="dica">💡 <b>Preços de referência (2026):</b> bilhete geral ~45€ adulto / ~25€ criança (4–12), <b>telecabina incluída</b>. Família numerosa e 65+ têm desconto só na bilheteira física. Comprar online em <a href="https://entradas.parquedecabarceno.com/" target="_blank">entradas.parquedecabarceno.com</a>. Em outubro abre ~09:30–18:00 — confirmar no site oficial parquedecabarceno.com.</div>
+    <div class="dica">💡 <b>Rota dentro do parque:</b> os carros circulam em sentido único. As girafas cruzam a estrada! Paragens obrigatórias: vale dos elefantes, desfiladeiro dos urubus, lago dos flamingos.</div>
+    <p style="margin-top:10px"><a class="btn" href="https://www.google.com/maps/dir/Potes/Parque+de+Cabárceno,+Penagos" target="_blank">🗺️ Rota Potes → Cabárceno</a></p>
+  </div>
+
+  <div class="card">
+    <span class="dia">Seg 5 Out — Santander + Regresso</span>
+    <h3>🌊 Santander (opcional) → 🇵🇹 Regresso</h3>
+    <div class="step"><span class="hora">Manhã</span><span class="ico">🏖️</span><span class="txt"><strong>Santander</strong> (se der tempo): <a href="https://www.google.com/maps/search/Playa+del+Sardinero+Santander" target="_blank">Playa del Sardinero</a>, <a href="https://www.google.com/maps/search/Palacio+de+la+Magdalena+Santander" target="_blank">Palácio de la Magdalena</a> (verão real dos reis), farol de Cabo Mayor. Café com sobremeda ou rabas (chocos fritos) no Centro Botín.</span></div>
+    <div class="step"><span class="hora">~13:00</span><span class="ico">🚗</span><span class="txt">Início do regresso (~630 km, ~6h15 a Lisboa; quem vem do norte sai mais cedo).</span></div>
+    <div class="step"><span class="hora">Noite</span><span class="ico">🇵🇹</span><span class="txt">Chegada a Portugal. Fim do programa! 🎉</span></div>
+    <div class="curio"><b>🔥 Fato histórico:</b> Santander ardeu quase por completo na madrugada de <b>15–16 Fevereiro de 1941</b> — o maior incêndio urbano da história de Espanha. O centro que hoje se visita foi praticamente todo reconstruído depois. A cidade também explodiu em 1893 com o vapor <b>Cabo Machichaco</b> (centenas de mortos). Cidade de má sorte e enorme resiliência.</div>
+    <p style="margin-top:10px"><a class="btn" href="https://www.google.com/maps/dir/Cabárceno/Santander/Lisboa" target="_blank">🗺️ Rota regresso no Google Maps</a></p>
+  </div>
+</div>
+
+<div class="section" id="estadias">
+  <h2>🛏️ Sugestões de Estadia (económicas)</h2>
+  <p style="color:var(--muted);font-size:.9em;margin-bottom:12px">Preços de referência para 2–4 pessoas por quarto/noite em outubro. <strong>Confirmar disponibilidade</strong> — ponte de outubro esgota depressa. Clicar para reservar.</p>
+
+  <div class="card">
+    <span class="dia">Noite de 2 Out — Palencia</span>
+    <div class="estadia">
+      <h4>1️⃣ Hotel Castilla Torre de Guzmán</h4>
+      <p>Centro, junto à Calle Mayor. Quartos triplo/quádruplo. <span class="preco">~55–75€</span></p>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-pt.html?ss=Palencia&checkin=2026-10-02&checkout=2026-10-03&group_adults=3&no_rooms=1" target="_blank">Ver no Booking</a>
+    </div>
+    <div class="estadia">
+      <h4>2️⃣ AC Hotel Palencia de Santa Ana (Marriott)</h4>
+      <p>Moderno, junto ao rio Carrión, parque próprio. Familiar. <span class="preco">~70–85€</span></p>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-pt.html?ss=Palencia&checkin=2026-10-02&checkout=2026-10-03" target="_blank">Ver no Booking</a>
+    </div>
+    <div class="estadia">
+      <h4>3️⃣ Apartamentos Turísticos Palencia</h4>
+      <p>Opção apartamento para 4–6 — cozinha, mais barato por cabeça para 2 famílias. <span class="preco">~80–100€/apto</span></p>
+      <a class="btn" href="https://www.airbnb.pt/s/Palencia/homes?checkin=2026-10-02&checkout=2026-10-03" target="_blank">Ver no Airbnb</a>
+    </div>
+    <div class="dica">💡 Em Palencia, o <b>Hotel 3 Reyes</b> e o <b>Palacio Azcarate</b> são alternativas no centro histórico com boa relação qualidade/preço — comparar no Booking com filtro "familias".</div>
+  </div>
+
+  <div class="card">
+    <span class="dia">Noite de 3 Out — Vale de Liébana (Potes)</span>
+    <div class="estadia">
+      <h4>1️⃣ Hostal Potes / Pensión Casa Bárcena</h4>
+      <p>No coração de Potes, simples e limpo, com pequeno-almoço. <span class="preco">~45–60€</span></p>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-pt.html?ss=Potes&checkin=2026-10-03&checkout=2026-10-04" target="_blank">Ver no Booking</a>
+    </div>
+    <div class="estadia">
+      <h4>2️⃣ Casa rural em Mogrovejo / Camaleño</h4>
+      <p>Casas de pedra típicas com vistas para os Picos — experiência completa. <span class="preco">~70–110€/casa</span></p>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-pt.html?ss=Mogrovejo&checkin=2026-10-03&checkout=2026-10-04" target="_blank">Ver no Booking</a>
+    </div>
+    <div class="estadia">
+      <h4>3️⃣ Hotel del Oso (Cosgaya)</h4>
+      <p>A 5 min de Potes, montanha, ótimo para famílias com crianças. <span class="preco">~75–95€</span></p>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-pt.html?ss=Valle+de+Camale%C3%B1o&checkin=2026-10-03&checkout=2026-10-04" target="_blank">Ver no Booking</a>
+    </div>
+    <div class="dica">💡 <b>Liébana em outubro = temporada baixa</b> — os preços caem face ao verão. Mas em fim de semana de ponte espanhol (12 Out é feriado nacional — esta ponte pode ter movimento) reservar com 2–3 semanas de antecedência.</div>
+  </div>
+
+  <div class="card">
+    <span class="dia">Noite de 4 Out — Zona Cabárceno / Santander</span>
+    <div class="estadia">
+      <h4>1️⃣ Pensión/hostais em Penagos ou Villacarriedo</h4>
+      <p>A 5–15 min da porta do parque de manhã. Mais barato que Santander. <span class="preco">~50–70€</span></p>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-pt.html?ss=Penagos&checkin=2026-10-04&checkout=2026-10-05" target="_blank">Ver no Booking</a>
+    </div>
+    <div class="estadia">
+      <h4>2️⃣ Hotel em Santander (El Sardinero)</h4>
+      <p>Permite passear à noite no Sardinero e sair direto para a A-8 no regresso. <span class="preco">~70–95€</span></p>
+      <a class="btn" href="https://www.booking.com/searchresults.pt-pt.html?ss=Santander&checkin=2026-10-04&checkout=2026-10-05" target="_blank">Ver no Booking</a>
+    </div>
+    <div class="estadia">
+      <h4>3️⃣ Apartamento familiar Santander</h4>
+      <p>2 apartamentos ou 1 de 8–10, cozinha para jantar leve e poupar. <span class="preco">~120–160€/apto</span></p>
+      <a class="btn" href="https://www.airbnb.pt/s/Santander/homes?checkin=2026-10-04&checkout=2026-10-05" target="_blank">Ver no Airbnb</a>
+    </div>
+    <div class="dica">💡 <b>Estratégia de grupo:</b> para 3 casais, 2 quartos familiares (4 pax) + 1 casal é a combinação mais comum. Filtrar no Booking por "capacidade: 4 pessoas" e comparar com 2 quartos duplos — às vezes sai mais barato 1 apto grande.</div>
+  </div>
+</div>
+<div class="section" id="mapa">
+  <h2>🗺️ Mapa do Programa</h2>
+  <p class="legend">🟡 Base/escala • 🟢 Dia 3 (Picos) • 🔴 Dia 4 (Cabárceno) • ⚪ Portugal</p>
+  <div class="mapa-box"><div id="mapa"></div></div>
+</div>
+
+<div class="section" id="curiosidades">
+  <h2>🏛️ Curiosidades & Factos</h2>
+
+  <div class="card">
+    <h3>🏔️ Picos de Europa</h3>
+    <div class="curio"><b>1918 — o 1.º parque nacional de Espanha.</b> Criado a 22 de Julho de 1918 por Pedro Pidal, marquês de Villaviciosa — alpinista pioneiro que subiu o Naranjo de Bulnes em 1904. Começou por proteger só a Montanha de Covadonga; hoje cobre os 3 maciços e é partilhado por Astúrias, Leão e Cantábria.</div>
+    <div class="curio"><b>Porque "Picos"?</b> Os navegadores que voltavam das Américas viam estes cumprimentos nevezados a ~120 km do mar — eram o primeiro "sinal" da Europa ao vir do Atlântico. O Naranjo de Bulnes (Picu Urriellu, 2.519 m) é a agulha símbolo do macizo central.</div>
+    <div class="curio"><b>Cantabria infinita.</b> A Liébana é um vale fechado por montanhas que durante séculos foi quase inacessível — só ganhou ligações modernas em meados do século XX. Por isso a gastronomia e arquitetura ficaram "congeladas" no tempo.</div>
+  </div>
+
+  <div class="card">
+    <h3>⛪ Santo Toribio & Beato</h3>
+    <div class="curio"><b>O maior pedaço da Cruz de Cristo.</b> O Lignum Crucis chegou a Cantábria no séc. VIII, trazido por monges que fugiam de Jerusalém (via África e Toledo) com relíquias salvas da invasão muçulmana. A mão esquerda de Santo Toribio está também exposta — em prata.</div>
+    <div class="curio"><b>Beato de Liébana, o "profeta falhado".</b> Monge do séc. VIII, escreveu os <i>Comentários ao Apocalipse</i> (os célebres "Beatos" iluminados medievais) e convenceu meio reino de que o mundo acabaria no ano 800. Quando 800 passou sem fim do mundo… continuou a ser venerado na mesma.</div>
+    <div class="curio"><b>Ano Jubilar Lebaniego.</b> Santo Toribio celebra ano santo quando 16 de Abril cai ao domingo (de 5 em 5/6/11 anos). O último foi 2023–24; o próximo 2028–29. A Porta do Perdão só se abre nesses anos.</div>
+  </div>
+
+  <div class="card">
+    <h3>🦁 Cabárceno</h3>
+    <div class="curio"><b>De mina romana a paraíso animal.</b> O ferro de Cabárceno foi explorado desde a época romana; a atividade cessou em 1985 e o parque abriu em 1990. Os 750 hectares de falésias de dolomita — cicatriz da mineração — tornaram-se palco de 120 espécies em semiliberdade.</div>
+    <div class="curio"><b>O elefante Pipi.</b> O elefante africano mais famoso de Espanha viveu aqui — a elefanta Pipi, uma das mais longevas do mundo em cativeiro (morreu em 2019 com mais de 50 anos). Os elefantes de Cabárceno aparecem em documentários internacionais.</div>
+  </div>
+
+  <div class="card">
+    <h3>🏘️ Mogrovejo, Potes & Santander</h3>
+    <div class="curio"><b>Mogrovejo.</b> ~40 habitantes, torreão do séc. XIII, cenário da série alemã de Heidi nos anos 70. Desde 2020 no clube "Los Pueblos más Bonitos de España". A família real espanhola descende dos senhores de Mogrovejo (linha de Santo Toribio de Mogrovejo, arcebispo de Lima, santo patrono do Peru).</div>
+    <div class="curio"><b>Potes e a torre do Infantado.</b> O cocido lebaniego (grão-de-bico, berza, compango) é o prato rei. Potes é também a capital do orujo — aguardente de bagaço — com festival próprio em Novembro. No Café Fósforo ("el bar de Potes") pararam todos, de caçadores a cineastas.</div>
+    <div class="curio"><b>Santander, a cidade que ardeu.</b> Incêndio de 1941 destruiu o centro medieval; a reconstrução ditou a cidade atual. Palácio de la Magdalena: residência de verão de Afonso XIII até 1931, hoje sede de universidade internacional — e cenário de Séries TV espanholas.</div>
+  </div>
+
+  <div class="card">
+    <h3>🇵🇹 No caminho (Portugal)</h3>
+    <div class="curio"><b>Batalha.</b> O Mosteiro de Santa Maria da Vitória levou <b>150 anos</b> a construir (1388–1533). As "Capelas Imperfeitas" foram deixadas inacabadas por decisão do rei D. Duarte… que está lá enterrado. O Mosteiro guarda o túmulo do Infante D. Henrique, o Navegador.</div>
+    <div class="curio"><b>Figueira da Foz.</b> Apelidada de "Rainha das Praias" no séc. XIX, foi um dos primeiros balneários de Portugal e no séc. XIX casino e teatro atraiam a aristocracia europeia inteira — daqui saiu também o epíteto "buena onda" dos anos 70.</div>
+  </div>
+
+  <div class="card">
+    <h3>💰 Orçamento de Referência (por pessoa, aproximado)</h3>
+    <table>
+      <tr><th>Item</th><th>Valor</th><th>Notas</th></tr>
+      <tr><td>Combustível (~1.300 km ida+volta/carro)</td><td>~130–160€</td><td>dividir por 4–5 ocupantes</td></tr>
+      <tr><td>Portagens (PT + ES)</td><td>~60–80€/carro</td><td>A23/A62 em Espanha são gratuitas — portagens PT na A1/A25</td></tr>
+      <tr><td>3 noites alojamento</td><td>~150–240€/casal</td><td>ver sugestões acima</td></tr>
+      <tr><td>Teleférico Fuente Dé</td><td>~17€ adulto / ~10€ criança</td><td>reservar online antes</td></tr>
+      <tr><td>Cabárceno (telecabina incl.)</td><td>~45€ adulto / ~25€ criança</td><td>bilhete geral com telecabina incluída</td></tr>
+      <tr><td>Santo Toribio</td><td>~3€</td><td>visita + Lignum Crucis</td></tr>
+      <tr><td>Refeições</td><td>~12–25€/pessoa/refeição</td><td>picnic no Sáb 3, restaurantes em Potes</td></tr>
+    </table>
+    <div class="dica">💡 <b>Reservas a fazer JÁ:</b> 1) Teleférico Fuente Dé (bilhete com hora), 2) Alojamento nas 3 noites, 3) Jantar de sábado em Potes (mesa para 10). O resto pode ser à chegada.</div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <p>⛰️ Picos de Europa — Outubro 2026 • Família Antunes & Gomes</p>
+  <p style="font-size:.8em;margin-top:5px">Feito com ❤️ por Hermes</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+(function(){
+  var map = L.map('mapa').setView([42.6,-4.2],8);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap',maxZoom:18}).addTo(map);
+  var pts=[
+    [39.7536,-4.7239,"🏙️ Palencia","Dormida 2 Out","https://www.google.com/maps/search/Palencia+Espanha",'#f59e0b'],
+    [43.1578,-4.5069,"🏘️ Mogrovejo","Sáb 3 — 11:15","https://www.google.com/maps/search/Mogrovejo+Cantabria",'#10b981'],
+    [43.2086,-4.6590,"🚠 Fuente Dé","Sáb 3 — 12:15 · Teleférico","https://www.google.com/maps/search/Teleférico+Fuente+Dé",'#2563eb'],
+    [43.1442,-4.6689,"⛪ Santo Toribio","Sáb 3 — 15:00 · Lignum Crucis","https://www.google.com/maps/search/Santo+Toribio+de+Liébana",'#8b5cf6'],
+    [43.1827,-4.6222,"🏘️ Potes","Sáb 3 — 16:30 · Jantar","https://www.google.com/maps/search/Potes+Cantabria",'#10b981'],
+    [43.2616,-3.7776,"🦁 Cabárceno","Dom 4 — dia inteiro","https://www.google.com/maps/search/Parque+de+Cabárceno",'#ef4444'],
+    [43.4623,-3.8094,"🌊 Santander","Seg 5 — opcional","https://www.google.com/maps/search/Santander+Espanha",'#f59e0b'],
+    [42.5989,-4.6648,"⛪ Batalha (PT)","Sex 2 — paragem","https://www.google.com/maps/search/Mosteiro+da+Batalha",'#94a3b8'],
+    [38.7223,-9.1393,"🇵🇹 Lisboa","Partida Sex 2","https://www.google.com/maps/search/Lisboa",'#64748b']
+  ];
+  pts.forEach(function(p){
+    L.circleMarker([p[0],p[1]],{radius:10,fillColor:p[5],color:'#fff',weight:2,fillOpacity:.95})
+      .addTo(map).bindPopup('<b>'+p[2]+'</b><br>'+p[3]+'<br><a href="'+p[4]+'" target="_blank" style="color:#2563eb">Abrir no Google Maps →</a>');
+  });
+  L.polyline([[38.7223,-9.1394],[39.6570,-8.8071],[39.5682,-8.8071],[41.0074,-3.2979],[42.5989,-4.6648]],{color:'#f59e0b',dashArray:'8 8',weight:3,opacity:.7}).addTo(map);
+  L.polyline([[42.5989,-4.6648],[43.1578,-4.5069],[43.2086,-4.6590],[43.1827,-4.6689],[43.1442,-4.6689],[43.1827,-4.6222]],{color:'#2563eb',weight:3,opacity:.8}).addTo(map);
+  L.polyline([[43.1827,-4.6222],[43.2616,-3.7776]],{color:'#ef4444',weight:3,opacity:.7,dashArray:'6 6'}).addTo(map);
+  L.polyline([[43.2616,-3.7776],[43.4623,-3.8094]],{color:'#10b981',weight:3,opacity:.7,dashArray:'6 6'}).addTo(map);
+})();
+</script>
+
+</body>
+</html>
